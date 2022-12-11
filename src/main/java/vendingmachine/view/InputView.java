@@ -45,6 +45,10 @@ public class InputView {
         String userInput = getUserInput();
     }
 
+    public void checkProductsFormat(String userInput) {
+
+    }
+
     /**
      * 구입 상품명 입력
      */

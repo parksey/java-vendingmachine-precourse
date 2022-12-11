@@ -22,4 +22,11 @@ public class InputViewTest {
         }).isInstanceOf(IllegalArgumentException.class);
     }
 
+    @ParameterizedTest
+    @ValueSource(strings = {"", " ", "1ㄹㄷㄴ", "abc", "5", "15", "0"})
+    public void checkUserAmount_test(String userInput) {
+        assertThatThrownBy(()-> {
+            inputView.checkUserAmount(userInput);
+        }).isInstanceOf(IllegalArgumentException.class);
+    }
 }

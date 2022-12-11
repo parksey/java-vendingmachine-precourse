@@ -29,4 +29,20 @@ public class InputExceptionTest {
             InputException.notChangeMoney(userInput);
         }).isInstanceOf(IllegalArgumentException.class);
     }
+
+    @ParameterizedTest
+    @ValueSource(ints = {0,5})
+    public void notProductsListFormat_test(long userInput) {
+        assertThatThrownBy(()-> {
+            InputException.notProductsListFormat(userInput);
+        }).isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @ParameterizedTest
+    @ValueSource(ints = {0,5})
+    public void productsFormat_test(long userInput) {
+        assertThatThrownBy(()-> {
+            InputException.notProductsFormat(userInput);
+        }).isInstanceOf(IllegalArgumentException.class);
+    }
 }
