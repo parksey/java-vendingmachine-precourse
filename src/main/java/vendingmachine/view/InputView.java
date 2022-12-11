@@ -4,7 +4,9 @@ import camp.nextstep.edu.missionutils.Console;
 import vendingmachine.domain.Product;
 import vendingmachine.domain.Vendingmachine;
 import vendingmachine.util.ProductFormat;
+import vendingmachine.util.ProductInfo;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -32,18 +34,35 @@ public class InputView {
     /**
      * 자판기 상품 리스트 입력
      */
-    public List<Product> readProducts() {
+    public Map<String, Product> readProducts(Map<String, Product> productList) {
         String userInput = getUserInput();
-        checkProductsFormat(userInput);
-        return null;
+        return checkGetProductsFormat(productList, userInput);
     }
 
-    public void checkProductsFormat(String userInput) {
+    public Map<String, Product> checkGetProductsFormat(Map<String, Product> productList, String userInput) {
         InputException.nullException(userInput);
         InputException.notProductStartEndFormatException(userInput);
         List<String> inputList = List.of(userInput.split(ProductFormat.CLONE.getFormat()));
         InputException.notProductsListFormatException(inputList);
+        return inputListToProducts(inputList);
+    }
 
+    public Map<String, Product> inputListToProducts(List<String> inputList) {
+        Map<String, Product> vendingProducts = new HashMap<>();
+
+        for (String input : inputList) {
+            List<String> productInfo =  List.of(input.substring(1, input.length()-1));
+            String productName = productInfo.get(ProductInfo.NAME.getIndex());
+            InputException.isInProductsExcpetion(vendingProducts, productName);
+            vendingProducts.put(productName, getProduct(productInfo));
+        }
+        return vendingProducts;
+    }
+
+    public Product getProduct(List<String> productInfo) {
+        return Product.of(productInfo.get(ProductInfo.NAME.getIndex())
+        ,Long.parseLong(productInfo.get(ProductInfo.PRICE.getIndex()))
+        ,Long.parseLong(productInfo.get(ProductInfo.COUNT.getIndex())));
     }
 
     /**
@@ -70,7 +89,7 @@ public class InputView {
     }
 
     public void checkProductName(Map<String, Product> productList, String userInput) {
-        InputException.isNotInProducts(productList, userInput);
+        InputException.isNotInProductsExcpetion(productList, userInput);
     }
 
 }

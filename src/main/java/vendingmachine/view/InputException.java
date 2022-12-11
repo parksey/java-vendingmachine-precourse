@@ -83,9 +83,15 @@ public class InputException {
     }
 
 
-    public static void isNotInProducts(Map<String, Product> productList, String userInput) {
+    public static void isNotInProductsExcpetion(Map<String, Product> productList, String userInput) {
         if (!productList.containsKey(userInput)) {
             throw new IllegalArgumentException("해당 제품을 포함하고 있지 않습니다.");
+        }
+    }
+
+    public static void isInProductsExcpetion(Map<String, Product> productList, String userInput) {
+        if (!productList.containsKey(userInput)) {
+            throw new IllegalArgumentException("해당 제품은 이미 존재합니다. 중복은 허용하지 않습니다.");
         }
     }
 }

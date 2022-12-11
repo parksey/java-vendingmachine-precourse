@@ -3,6 +3,10 @@ package vendingmachine.view;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
+import vendingmachine.domain.Product;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
@@ -51,8 +55,12 @@ public class InputViewTest {
             ,"[;,1500,20];[사이다,1000,10]"
     })
     public void checkProductsFormat_test(String userInput) {
+        Map<String, Product> productList = new HashMap<>();
+        productList.put("가나", null);
+        productList.put("초콜릿", null);
+        productList.put("해쉬", null);
         assertThatThrownBy(()-> {
-            inputView.checkProductsFormat(userInput);
+            inputView.checkGetProductsFormat(productList, userInput);
         }).isInstanceOf(IllegalArgumentException.class);
     }
 }

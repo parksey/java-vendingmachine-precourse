@@ -61,7 +61,7 @@ public class InputExceptionTest {
         productList.put("초콜릿", null);
         productList.put("해쉬", null);
         assertThatThrownBy(()-> {
-            InputException.isNotInProducts(productList, userInput);
+            InputException.isNotInProductsExcpetion(productList, userInput);
         }).isInstanceOf(IllegalArgumentException.class);
     }
 }

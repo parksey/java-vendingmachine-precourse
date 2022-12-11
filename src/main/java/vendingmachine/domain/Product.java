@@ -13,4 +13,8 @@ public class Product {
         this.remainCount = remainCount;
     }
 
+
+    public static Product of(String name, long price, long remainCount) {
+        return new Product(name, price, remainCount);
+    }
 }
