@@ -1,9 +1,12 @@
 package vendingmachine.controller;
 
+import vendingmachine.domain.Product;
 import vendingmachine.domain.VendingmachineDomain;
 import vendingmachine.util.PrintMsg;
 import vendingmachine.view.InputView;
 import vendingmachine.view.OutputView;
+
+import java.util.Map;
 
 public class VendingController {
     private final InputView inputView;
@@ -19,8 +22,7 @@ public class VendingController {
     public void start() {
         readVendingmachineAmount();
 
-        // Product 입력
-            // 입력 VendingMachine에 넣기
+        readProuduct();
 
         // 투입금액 입력
         // 구매 상품 반복 입력
@@ -29,6 +31,9 @@ public class VendingController {
 
     public void readVendingmachineAmount() {
         vendingmachineDomain.setVendingmachine(getVendingMachineAmount());
+        outputView.printEmptyMsg();
+        outputView.printInitCoins(vendingmachineDomain.getCurrentCoinList());
+        outputView.printEmptyMsg();
     }
     public long getVendingMachineAmount() {
         while (true) {
@@ -43,7 +48,20 @@ public class VendingController {
     }
 
     public void readProuduct() {
+        vendingmachineDomain.setProducts(getProducts());
+        outputView.printEmptyMsg();
+    }
 
+    public Map<String, Product> getProducts() {
+        while (true) {
+            try {
+                outputView.printMsg(PrintMsg.INPUT_PRODUCT.getMsg());
+                return inputView.readProducts();
+            } catch (IllegalArgumentException exception) {
+                outputView.printMsg(exception.getMessage());
+                outputView.printEmptyMsg();
+            }
+        }
     }
 
 }

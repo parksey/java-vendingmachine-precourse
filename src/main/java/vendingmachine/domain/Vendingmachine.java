@@ -70,4 +70,8 @@ public class Vendingmachine {
     public void setProductMap(Map<String, Product> productMap) {
         this.productMap = productMap;
     }
+
+    public Map<Integer, Long> getCoinList() {
+        return coinList;
+    }
 }
