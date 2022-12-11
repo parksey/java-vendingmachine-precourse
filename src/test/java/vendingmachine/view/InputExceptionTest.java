@@ -2,6 +2,9 @@ package vendingmachine.view;
 
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
+import vendingmachine.util.ProductFormat;
+
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
@@ -30,19 +33,29 @@ public class InputExceptionTest {
         }).isInstanceOf(IllegalArgumentException.class);
     }
 
+    /**
+     *
+     *
+     *
+     *
+     *
+     *
+     *
+     */
     @ParameterizedTest
-    @ValueSource(ints = {0,5})
-    public void notProductsListFormat_test(long userInput) {
+    @ValueSource(strings = {
+            "[콜라,1500,20,]"
+            , "[콜라,1500,20];[사이다,1000,10]]"
+            , "[콜라,1500,20];[사이다,1000,10]]"
+            , "[[콜라,1500,20];[사이다,1000,10]]"
+            , "[[콜라,1500,20]]"
+            , "[,콜라,1500,20]"
+            , "[,]"
+    })
+    public void notProductsListFormat_test(String userInput) {
+        List<String> inputList = List.of(userInput.split(ProductFormat.CLONE.getFormat()));
         assertThatThrownBy(()-> {
-            InputException.notProductsListFormat(userInput);
-        }).isInstanceOf(IllegalArgumentException.class);
-    }
-
-    @ParameterizedTest
-    @ValueSource(ints = {0,5})
-    public void productsFormat_test(long userInput) {
-        assertThatThrownBy(()-> {
-            InputException.notProductsFormat(userInput);
+            InputException.notProductsListFormatException(inputList);
         }).isInstanceOf(IllegalArgumentException.class);
     }
 }

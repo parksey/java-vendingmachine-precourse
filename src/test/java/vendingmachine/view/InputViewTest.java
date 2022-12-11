@@ -29,4 +29,30 @@ public class InputViewTest {
             inputView.checkUserAmount(userInput);
         }).isInstanceOf(IllegalArgumentException.class);
     }
+
+    @ParameterizedTest
+    @ValueSource(strings = {
+            ""
+            , " "
+            , "[][]"
+            , "[;]"
+            , "[];[]"
+            , "[콜라,1505,20];[사이다,1000,10]"
+            , "[콜라,1500,50r];[사이다,1000,10]"
+            , "[콜라,1500,20];[사이다,1000,10]]"
+            , "[콜라,1500,20];[사이다,1000,10]]"
+            , "[[콜라,1500,20];[사이다,1000,10]]"
+            , "[[콜라,1500,20]]"
+            , "[콜라,1500,20,]"
+            , "[,콜라,1500,20]"
+            , "[,]"
+            , ";"
+            , "[];[;]"
+            ,"[;,1500,20];[사이다,1000,10]"
+    })
+    public void checkProductsFormat_test(String userInput) {
+        assertThatThrownBy(()-> {
+            inputView.checkProductsFormat(userInput);
+        }).isInstanceOf(IllegalArgumentException.class);
+    }
 }

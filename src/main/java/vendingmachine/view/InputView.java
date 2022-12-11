@@ -1,6 +1,9 @@
 package vendingmachine.view;
 
 import camp.nextstep.edu.missionutils.Console;
+import vendingmachine.util.ProductFormat;
+
+import java.util.List;
 
 public class InputView {
     public String getUserInput() {
@@ -43,11 +46,17 @@ public class InputView {
      */
     public void readProducts() {
         String userInput = getUserInput();
+        checkProductsFormat(userInput);
     }
 
     public void checkProductsFormat(String userInput) {
+        InputException.nullException(userInput);
+        InputException.notProductStartEndFormatException(userInput);
+        List<String> inputList = List.of(userInput.split(ProductFormat.CLONE.getFormat()));
+        InputException.notProductsListFormatException(inputList);
 
     }
+
 
     /**
      * 구입 상품명 입력
