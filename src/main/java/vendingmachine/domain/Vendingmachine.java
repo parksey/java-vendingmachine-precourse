@@ -10,6 +10,7 @@ import java.util.Map;
 
 public class Vendingmachine {
     private long vendingAmount;
+    private long userAmount;
     private final Map<Integer, Long> coinList;
     private Map<String, Product> productMap;
 
@@ -69,6 +70,10 @@ public class Vendingmachine {
 
     public void setProductMap(Map<String, Product> productMap) {
         this.productMap = productMap;
+    }
+
+    public void setUserAmount(long userAmount) {
+        this.userAmount = userAmount;
     }
 
     public Map<Integer, Long> getCoinList() {

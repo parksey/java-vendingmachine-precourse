@@ -12,7 +12,12 @@ public class VendingmachineDomain {
         vendingmachine.setProductMap(products);
     }
 
+    public void setUserAmount(long amount) {
+        vendingmachine.setUserAmount(amount);
+    }
+
     public Map<Integer, Long> getCurrentCoinList() {
         return vendingmachine.getCoinList();
     }
+
 }

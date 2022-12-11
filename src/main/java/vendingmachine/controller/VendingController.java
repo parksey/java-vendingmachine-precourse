@@ -21,10 +21,9 @@ public class VendingController {
 
     public void start() {
         readVendingmachineAmount();
-
         readProuduct();
+        readUserAmount();
 
-        // 투입금액 입력
         // 구매 상품 반복 입력
         // 적으면 종료
     }
@@ -63,5 +62,29 @@ public class VendingController {
             }
         }
     }
+
+    public void readUserAmount() {
+        vendingmachineDomain.setUserAmount(getUserAmount());
+    }
+
+    public long getUserAmount() {
+        while (true) {
+            try {
+                outputView.printMsg(PrintMsg.INIPUT_USER_AMOUNT.getMsg());
+                return inputView.readUserAmount();
+            } catch (IllegalArgumentException exception) {
+                outputView.printMsg(exception.getMessage());
+                outputView.printEmptyMsg();
+            }
+        }
+    }
+
+    public void buySomthing() {
+        while (true) {
+
+        }
+    }
+
+
 
 }
