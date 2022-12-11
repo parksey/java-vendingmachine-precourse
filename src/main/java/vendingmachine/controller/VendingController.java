@@ -11,4 +11,10 @@ public class VendingController {
         this.inputView = inputView;
         this.outputView = outputView;
     }
+
+    public void start() {
+        // 자판기 보유 금액 입력
+        // 자판기 금액 -> 동전 랜덤 변경
+        //
+    }
 }
