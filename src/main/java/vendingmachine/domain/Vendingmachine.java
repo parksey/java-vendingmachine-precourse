@@ -10,18 +10,17 @@ import java.util.Map;
 
 public class Vendingmachine {
     private long vendingAmount;
-    private Map<Integer, Long> coinList;
+    private final Map<Integer, Long> coinList;
     private Map<String, Product> productMap;
 
-    public Vendingmachine(long vendingAmount) {
+    public Vendingmachine(long vendingAmount, Map<Integer, Long> coinList) {
         this.vendingAmount = vendingAmount;
-        this.coinList = makeRandomCoinList(vendingAmount);
+        this.coinList = coinList;
     }
 
-
-
-    public Map<String, Product> getProductMap() {
-        return productMap;
+    public static Vendingmachine of(long vendingAmount) {
+        Map<Integer, Long> coinList = makeRandomCoinList(vendingAmount);
+        return new Vendingmachine(vendingAmount, coinList);
     }
 
     public static Map<Integer, Long> makeRandomCoinList(long vendingAmount) {
@@ -62,5 +61,9 @@ public class Vendingmachine {
 
     public static void addCoin(Map<Integer, Long> coinReuslt, int randomCoin) {
         coinReuslt.put(randomCoin, coinReuslt.get(randomCoin)+1);
+    }
+
+    public Map<String, Product> getProductMap() {
+        return productMap;
     }
 }

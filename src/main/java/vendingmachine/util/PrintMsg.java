@@ -6,7 +6,6 @@ public enum PrintMsg {
     INIPUT_USER_AMOUNT("투입 금액을 입력해 주세요."),
     INPUT_BUY("구매할 상품명을 입력해 주세요."),
 
-    EMPRTY(""),
     CURRENT_COIN("자판기가 보유한 동전"),
     REMAIN_AMOUNT("잔돈"),
     COUNT_UNIT("개"),
