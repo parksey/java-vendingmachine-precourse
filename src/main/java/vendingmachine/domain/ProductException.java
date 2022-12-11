@@ -1,11 +1,12 @@
 package vendingmachine.domain;
 
+import vendingmachine.util.ExceptionMsg;
 import vendingmachine.util.VendingmachineCode;
 
 public class ProductException {
     public static void isUnderPrice(long price) {
         if (price < VendingmachineCode.MIN_PRICE.getCode()) {
-            throw new IllegalArgumentException("100원보다 적은 금액입니다.");
+            throw new IllegalArgumentException(ExceptionMsg.NOT_MIN_AMOUNT.getMsg());
         }
     }
 }
