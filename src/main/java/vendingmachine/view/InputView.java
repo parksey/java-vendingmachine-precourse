@@ -15,7 +15,7 @@ public class InputView {
     }
 
     public void checkVendingmachineAmount() {
-        
+
     }
 
     /**
