@@ -66,4 +66,8 @@ public class Vendingmachine {
     public Map<String, Product> getProductMap() {
         return productMap;
     }
+
+    public void setProductMap(Map<String, Product> productMap) {
+        this.productMap = productMap;
+    }
 }

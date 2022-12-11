@@ -8,6 +8,7 @@ import vendingmachine.domain.Product;
 import java.util.HashMap;
 import java.util.Map;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class InputViewTest {
@@ -41,7 +42,7 @@ public class InputViewTest {
             , "[][]"
             , "[;]"
             , "[];[]"
-            , "[콜라,1505,20];[사이다,1000,10]"
+            , "[콜라,1500,20];[콜라,1000,10]"
             , "[콜라,1500,50r];[사이다,1000,10]"
             , "[콜라,1500,20];[사이다,1000,10]]"
             , "[콜라,1500,20];[사이다,1000,10]]"
@@ -55,12 +56,18 @@ public class InputViewTest {
             ,"[;,1500,20];[사이다,1000,10]"
     })
     public void checkProductsFormat_test(String userInput) {
-        Map<String, Product> productList = new HashMap<>();
-        productList.put("가나", null);
-        productList.put("초콜릿", null);
-        productList.put("해쉬", null);
         assertThatThrownBy(()-> {
-            inputView.checkGetProductsFormat(productList, userInput);
+            Map<String, Product> products= inputView.checkGetProductsFormat(userInput);
+            assertThat(products.containsKey("콜라")).isTrue();
+            assertThat(products.containsKey("사이다")).isTrue();
         }).isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"[콜라,1500,20];[사이다,1000,10]"})
+    public void contain_test(String userInput) {
+        Map<String, Product> products= inputView.checkGetProductsFormat(userInput);
+        assertThat(products.containsKey("콜라")).isTrue();
+        assertThat(products.containsKey("사이다")).isTrue();
     }
 }

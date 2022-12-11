@@ -17,9 +17,7 @@ public class VendingController {
     }
 
     public void start() {
-        // 자판기 보유 금액 입력
-            // 자판기 금액 -> 동전 랜덤 변경
-            // 자판기 보유 동전 출력
+        readVendingmachineAmount();
 
         // Product 입력
             // 입력 VendingMachine에 넣기
@@ -32,7 +30,6 @@ public class VendingController {
     public void readVendingmachineAmount() {
         vendingmachineDomain.setVendingmachine(getVendingMachineAmount());
     }
-
     public long getVendingMachineAmount() {
         while (true) {
             try {
@@ -43,6 +40,10 @@ public class VendingController {
                 outputView.printEmptyMsg();
             }
         }
+    }
+
+    public void readProuduct() {
+
     }
 
 }

@@ -34,12 +34,12 @@ public class InputView {
     /**
      * 자판기 상품 리스트 입력
      */
-    public Map<String, Product> readProducts(Map<String, Product> productList) {
+    public Map<String, Product> readProducts() {
         String userInput = getUserInput();
-        return checkGetProductsFormat(productList, userInput);
+        return checkGetProductsFormat(userInput);
     }
 
-    public Map<String, Product> checkGetProductsFormat(Map<String, Product> productList, String userInput) {
+    public Map<String, Product> checkGetProductsFormat(String userInput) {
         InputException.nullException(userInput);
         InputException.notProductStartEndFormatException(userInput);
         List<String> inputList = List.of(userInput.split(ProductFormat.CLONE.getFormat()));
@@ -51,7 +51,8 @@ public class InputView {
         Map<String, Product> vendingProducts = new HashMap<>();
 
         for (String input : inputList) {
-            List<String> productInfo =  List.of(input.substring(1, input.length()-1));
+            List<String> productInfo =  List.of(input.substring(1, input.length()-1).split(ProductFormat.COMMA.getFormat()));
+
             String productName = productInfo.get(ProductInfo.NAME.getIndex());
             InputException.isInProductsExcpetion(vendingProducts, productName);
             vendingProducts.put(productName, getProduct(productInfo));

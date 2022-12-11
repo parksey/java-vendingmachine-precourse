@@ -91,7 +91,7 @@ public class InputException {
     }
 
     public static void isInProductsExcpetion(Map<String, Product> productList, String userInput) {
-        if (!productList.containsKey(userInput)) {
+        if (productList.containsKey(userInput)) {
             throw new IllegalArgumentException(ExceptionMsg.CONTAIN.getMsg());
         }
     }
