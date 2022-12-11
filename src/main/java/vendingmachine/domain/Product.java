@@ -6,6 +6,8 @@ public class Product {
     private long remainCount;
 
     public Product(String name, long price, long remainCount) {
+        ProductException.isUnderPrice(price);
+
         this.name = name;
         this.price = price;
         this.remainCount = remainCount;

@@ -1,9 +1,12 @@
 package vendingmachine.view;
 
 import camp.nextstep.edu.missionutils.Console;
+import vendingmachine.domain.Product;
+import vendingmachine.domain.Vendingmachine;
 import vendingmachine.util.ProductFormat;
 
 import java.util.List;
+import java.util.Map;
 
 public class InputView {
     public String getUserInput() {
@@ -27,6 +30,23 @@ public class InputView {
     }
 
     /**
+     * 자판기 상품 리스트 입력
+     */
+    public List<Product> readProducts() {
+        String userInput = getUserInput();
+        checkProductsFormat(userInput);
+        return null;
+    }
+
+    public void checkProductsFormat(String userInput) {
+        InputException.nullException(userInput);
+        InputException.notProductStartEndFormatException(userInput);
+        List<String> inputList = List.of(userInput.split(ProductFormat.CLONE.getFormat()));
+        InputException.notProductsListFormatException(inputList);
+
+    }
+
+    /**
      * 투입 금액
      * @return
      */
@@ -42,27 +62,15 @@ public class InputView {
     }
 
     /**
-     * 자판기 상품 리스트 입력
-     */
-    public void readProducts() {
-        String userInput = getUserInput();
-        checkProductsFormat(userInput);
-    }
-
-    public void checkProductsFormat(String userInput) {
-        InputException.nullException(userInput);
-        InputException.notProductStartEndFormatException(userInput);
-        List<String> inputList = List.of(userInput.split(ProductFormat.CLONE.getFormat()));
-        InputException.notProductsListFormatException(inputList);
-
-    }
-
-
-    /**
      * 구입 상품명 입력
      */
-    public void readProductsName() {
+    public void readProductsName(Map<String, Product> productList) {
         String userInput = getUserInput();
+        checkProductName(productList, userInput);
+    }
+
+    public void checkProductName(Map<String, Product> productList, String userInput) {
+        InputException.isNotInProducts(productList, userInput);
     }
 
 }

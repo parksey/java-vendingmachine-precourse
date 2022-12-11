@@ -1,10 +1,12 @@
 package vendingmachine.view;
 
+import vendingmachine.domain.Product;
 import vendingmachine.util.ProductFormat;
 import vendingmachine.util.ProductInfo;
 import vendingmachine.util.VendingmachineCode;
 
 import java.util.List;
+import java.util.Map;
 
 public class InputException {
     public static void nullException(String userInput) {
@@ -78,5 +80,12 @@ public class InputException {
     }
     private static void checkCountFormat(String count) {
         notNumberException(count);
+    }
+
+
+    public static void isNotInProducts(Map<String, Product> productList, String userInput) {
+        if (!productList.containsKey(userInput)) {
+            throw new IllegalArgumentException("해당 제품을 포함하고 있지 않습니다.");
+        }
     }
 }
