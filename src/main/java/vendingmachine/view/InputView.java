@@ -6,23 +6,36 @@ public class InputView {
     public String getUserInput() {
         return Console.readLine();
     }
+
     /**
      * 자판기 보유 금액 입력
+     * @return
      */
-    public void readVendingmachineAmount() {
+    public long readVendingmachineAmount() {
         String userInput = getUserInput();
-        checkVendingmachineAmount();
+        checkAmount(userInput);
+        return Long.parseLong(userInput);
     }
 
-    public void checkVendingmachineAmount() {
-
+    public void checkAmount(String userInput) {
+        InputException.nullException(userInput);
+        InputException.notNumberException(userInput);
+        InputException.notChangeMoney(Long.parseLong(userInput));
     }
 
     /**
      * 투입 금액
+     * @return
      */
-    public void readUserAmount() {
+    public long readUserAmount() {
         String userInput = getUserInput();
+        checkUserAmount(userInput);
+        return Long.parseLong(userInput);
+    }
+
+    public void checkUserAmount(String userInput) {
+        checkAmount(userInput);
+        InputException.isZero(Long.parseLong(userInput));
     }
 
     /**

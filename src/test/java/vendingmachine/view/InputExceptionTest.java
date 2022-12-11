@@ -10,7 +10,7 @@ public class InputExceptionTest {
     @ValueSource(strings = {"", " "})
     public void nullException_test(String userInput) {
         assertThatThrownBy(()-> {
-            InputException.nullException();
+            InputException.nullException(userInput);
         }).isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -18,7 +18,15 @@ public class InputExceptionTest {
     @ValueSource(strings = {"", " "})
     public void isDigit_test(String userInput) {
         assertThatThrownBy(()-> {
-            InputException.notNumberException();
+            InputException.notNumberException(userInput);
+        }).isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @ParameterizedTest
+    @ValueSource(ints = {0,5})
+    public void canNotChangeMoney(long userInput) {
+        assertThatThrownBy(()-> {
+            InputException.notChangeMoney(userInput);
         }).isInstanceOf(IllegalArgumentException.class);
     }
 }
